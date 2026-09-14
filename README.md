@@ -1,4 +1,4 @@
-# unity-360_video_tour
+# alu-0x0A-unity-360_video_tour
 
 A 360-degree video VR tour built with Unity, targeting Meta Quest.
 
