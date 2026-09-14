@@ -37,11 +37,26 @@ The tour starts in the **LivingRoom**. From there, users can move to connected r
 
 ```
 Assets/
+├── Audio/
+│   └── freemusicbg.com-Tech Live.mp3
 ├── Videos/              (not tracked — add your own .mp4 files)
 ├── RenderTextures/
 ├── Materials/
 ├── Scripts/
-│   └── RoomNavigator.cs
+│   ├── GazeRaycaster.cs
+│   ├── HotspotInteraction.cs
+│   ├── InfoPanelToggle.cs
+│   ├── RoomNavigator.cs
+│   └── ScreenFader.cs
+├── Sprites/
+│   ├── HotspotIcon.png
+│   └── InfoIcon.png
 └── Scenes/
     └── 360VideoTour.unity
 ```
+
+## Audio Attribution
+
+- **Track**: "Tech Live"
+- **Artist / Source**: [freemusicbg.com](https://freemusicbg.com)
+- **License / Terms**: Free background music for non-commercial and multimedia projects.
