@@ -112,3 +112,9 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Video source files
+/[Aa]ssets/Videos/
+/[Aa]ssets/sourceclips/
+
+/[Aa]ssets/Videos.meta
