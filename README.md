@@ -1,19 +1,19 @@
 # unity-360_video_tour
 
-A 360° video VR tour built with Unity, targeting Meta Quest.
+A 360-degree video VR tour built with Unity, targeting Meta Quest.
 
 ## Description
 
-This project lets users explore four different 360° video environments — LivingRoom, Cantina, Cube, and Mezzanine — by navigating between them through interactive hotspots placed inside each scene.
+This project lets users explore four different 360-degree video environments (LivingRoom, Cantina, Cube, and Mezzanine) by navigating between them through interactive hotspots placed inside each scene.
 
-The tour starts in the **LivingRoom**. From there, users can move to connected rooms using on-screen navigation buttons. Each room plays a looping 360° video rendered on the inside of a sphere using Video Player and Render Textures.
+The tour starts in the **LivingRoom**. From there, users can move to connected rooms using on-screen navigation buttons. Each room plays a looping 360-degree video rendered on the inside of a sphere using Video Player and Render Textures.
 
 ## Navigation Map
 
-- **LivingRoom** (Start) → Cantina, Cube
-- **Cantina** → LivingRoom, Cube
-- **Cube** → LivingRoom, Cantina, Mezzanine
-- **Mezzanine** → Cube
+- **LivingRoom** (Start) -> Cantina, Cube
+- **Cantina** -> LivingRoom, Cube
+- **Cube** -> LivingRoom, Cantina, Mezzanine
+- **Mezzanine** -> Cube
 
 ## Setup
 
@@ -39,7 +39,7 @@ The tour starts in the **LivingRoom**. From there, users can move to connected r
 Assets/
 ├── Audio/
 │   └── freemusicbg.com-Tech Live.mp3
-├── Videos/              (not tracked — add your own .mp4 files)
+├── Videos/              (not tracked, add your own .mp4 files)
 ├── RenderTextures/
 ├── Materials/
 ├── Scripts/
@@ -57,6 +57,6 @@ Assets/
 
 ## Audio Attribution
 
-- **Track**: "Tech Live"
-- **Artist / Source**: [freemusicbg.com](https://freemusicbg.com)
-- **License / Terms**: Free background music for non-commercial and multimedia projects.
+- Track: "Tech Live"
+- Artist / Source: [freemusicbg.com](https://freemusicbg.com)
+- License: Free background music for non-commercial and multimedia projects.
