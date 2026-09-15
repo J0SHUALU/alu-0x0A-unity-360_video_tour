@@ -35,6 +35,7 @@ The tour starts in the **LivingRoom**. From there, users can move to connected r
 - Point a Touch controller ray at a hotspot and pull the trigger to move to that room
 - Point at an info button and pull the trigger to open or close its info box
 - Gaze also works: look at a hotspot or info button for about two seconds
+- The video sphere stays centered on your head, so leaning or walking never breaks the 360 view
 - Hovered buttons grow slightly as visual feedback, and every room change fades to black and back
 
 ## Project Structure
@@ -57,6 +58,7 @@ Assets/
 │   ├── InfoPanelToggle.cs
 │   ├── RoomNavigator.cs
 │   ├── RayLengthExtender.cs
+│   ├── RoomHeadAnchor.cs
 │   └── ScreenFader.cs
 ├── Editor/
 │   └── TourBuilder.cs
