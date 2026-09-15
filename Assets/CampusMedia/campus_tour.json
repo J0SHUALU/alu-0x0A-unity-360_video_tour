@@ -1,0 +1,35 @@
+{
+  "title": "Custom Campus Tour",
+  "stops": [
+    {
+      "id": "Stop1_Courtyard",
+      "title": "Enterprise Courtyard",
+      "info": "The open courtyard outside the Enterprise building, shaded by acacia trees. The walkway on the right leads to the next building.",
+      "media": "Capture1",
+      "nextYaw": 0,
+      "backYaw": 180,
+      "infoYaw": -60,
+      "mediaYaw": 0
+    },
+    {
+      "id": "Stop2_Walkway",
+      "title": "Brick Walkway",
+      "info": "A brick path along the hillside that wraps around the building. The lit entrance ahead leads inside.",
+      "media": "Capture2",
+      "nextYaw": 0,
+      "backYaw": 180,
+      "infoYaw": -60,
+      "mediaYaw": 0
+    },
+    {
+      "id": "Stop3_Hall",
+      "title": "Main Hall",
+      "info": "The double-height hall inside, with the main staircase, standing tables and glass doors back out to campus.",
+      "media": "Capture3",
+      "nextYaw": 0,
+      "backYaw": 180,
+      "infoYaw": -60,
+      "mediaYaw": 0
+    }
+  ]
+}
