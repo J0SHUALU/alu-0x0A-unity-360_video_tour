@@ -114,7 +114,4 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ss]ceneDependencyCache*
 
 # Video source files
-/[Aa]ssets/Videos/
-/[Aa]ssets/sourceclips/
 
-/[Aa]ssets/Videos.meta

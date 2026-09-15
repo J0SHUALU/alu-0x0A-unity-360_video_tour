@@ -19,13 +19,8 @@ The tour starts in the **LivingRoom**. From there, users can move to connected r
 
 1. Clone this repository
 2. Open the project in Unity 6000.4.7f1 or later
-3. Download the source video files and place them in `Assets/Videos/`:
-   - `LivingRoom.mp4`
-   - `Cantina.mp4`
-   - `Cube.mp4`
-   - `Mezzanine.mp4`
-4. Open the `360VideoTour` scene from `Assets/Scenes/`
-5. Press Play to preview in the Editor, or build for Android (Meta Quest)
+3. Open the `360VideoTour` scene from `Assets/Scenes/`
+4. Press Play to preview in the Editor, or build for Android (Meta Quest)
 
 ## Build Target
 
@@ -37,9 +32,14 @@ The tour starts in the **LivingRoom**. From there, users can move to connected r
 
 ```
 Assets/
-├── Audio/
+├── audio/
+│   ├── BGMMixer.mixer
 │   └── freemusicbg.com-Tech Live.mp3
-├── Videos/              (not tracked, add your own .mp4 files)
+├── Videos/
+│   ├── LivingRoom.mp4
+│   ├── Cantina.mp4
+│   ├── Cube.mp4
+│   └── Mezzanine.mp4
 ├── RenderTextures/
 ├── Materials/
 ├── Scripts/
@@ -57,6 +57,6 @@ Assets/
 
 ## Audio Attribution
 
-- Track: "Tech Live"
-- Artist / Source: [freemusicbg.com](https://freemusicbg.com)
-- License: Free background music for non-commercial and multimedia projects.
+"Tech Live" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
