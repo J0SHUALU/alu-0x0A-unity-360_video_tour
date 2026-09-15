@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Video;
 
 /// <summary>
-/// Manages navigation between 360-degree video rooms.
+/// Manages navigation between 360-degree rooms inside one scene.
 /// Handles switching the active room sphere, fading the screen to black, and controlling video playback.
+/// The Intranet tour uses the four named room fields; the custom campus tour uses the rooms list.
 /// </summary>
 public class RoomNavigator : MonoBehaviour
 {
@@ -33,6 +34,18 @@ public class RoomNavigator : MonoBehaviour
     [SerializeField]
     public GameObject mezzanine;
 
+    /// <summary>
+    /// Additional rooms, looked up by their GameObject name.
+    /// </summary>
+    [SerializeField]
+    public List<GameObject> rooms = new List<GameObject>();
+
+    /// <summary>
+    /// Name of the room shown first. When empty, LivingRoom or the first listed room is used.
+    /// </summary>
+    [SerializeField]
+    public string startRoom = "";
+
     // The currently active room GameObject
     private GameObject currentRoom;
 
@@ -42,26 +55,61 @@ public class RoomNavigator : MonoBehaviour
     // Flag indicating whether a room transition is currently in progress
     private bool isTransitioning = false;
 
+    /// <summary>
+    /// Every room this navigator controls.
+    /// </summary>
+    public IEnumerable<GameObject> AllRooms
+    {
+        get
+        {
+            EnsureRoomMap();
+            return roomMap.Values;
+        }
+    }
+
+    /// <summary>
+    /// The room that is currently shown.
+    /// </summary>
+    public GameObject CurrentRoom
+    {
+        get { return currentRoom; }
+    }
+
     private void Start()
     {
-        // Build the room lookup table
-        roomMap = new Dictionary<string, GameObject>
-        {
-            { "LivingRoom", livingRoom },
-            { "Cantina", cantina },
-            { "Cube", cube },
-            { "Mezzanine", mezzanine }
-        };
+        EnsureRoomMap();
 
         // Deactivate all rooms first
         foreach (var room in roomMap.Values)
         {
-            if (room != null)
-                room.SetActive(false);
+            room.SetActive(false);
         }
 
-        // Start in the LivingRoom
-        currentRoom = livingRoom;
+        // Pick the starting room
+        GameObject first = null;
+        if (!string.IsNullOrEmpty(startRoom))
+        {
+            roomMap.TryGetValue(startRoom, out first);
+        }
+
+        if (first == null)
+        {
+            first = livingRoom;
+        }
+
+        if (first == null)
+        {
+            foreach (var room in rooms)
+            {
+                if (room != null)
+                {
+                    first = room;
+                    break;
+                }
+            }
+        }
+
+        currentRoom = first;
         ActivateRoom(currentRoom);
     }
 
@@ -72,17 +120,48 @@ public class RoomNavigator : MonoBehaviour
     /// <param name="roomName">The name of the target room to switch to.</param>
     public void SwitchRoom(string roomName)
     {
-        if (isTransitioning)
+        if (isTransitioning || SceneTransition.IsLoading)
             return;
 
-        if (!roomMap.ContainsKey(roomName))
+        EnsureRoomMap();
+        GameObject targetRoom;
+        if (!roomMap.TryGetValue(roomName, out targetRoom))
             return;
 
-        GameObject targetRoom = roomMap[roomName];
         if (targetRoom == null || targetRoom == currentRoom)
             return;
 
         StartCoroutine(TransitionRoutine(targetRoom));
+    }
+
+    // Builds the room lookup table once
+    private void EnsureRoomMap()
+    {
+        if (roomMap != null)
+            return;
+
+        roomMap = new Dictionary<string, GameObject>();
+        AddRoom("LivingRoom", livingRoom);
+        AddRoom("Cantina", cantina);
+        AddRoom("Cube", cube);
+        AddRoom("Mezzanine", mezzanine);
+
+        foreach (var room in rooms)
+        {
+            if (room != null)
+            {
+                AddRoom(room.name, room);
+            }
+        }
+    }
+
+    // Adds a room to the lookup table if it is assigned and not already present
+    private void AddRoom(string key, GameObject room)
+    {
+        if (room != null && !roomMap.ContainsKey(key))
+        {
+            roomMap.Add(key, room);
+        }
     }
 
     // Executes the fade-out, room switch, and fade-in sequence

@@ -4,25 +4,35 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 /// <summary>
-/// Editor utility that builds the 360 video tour for Meta Quest 2.
+/// Editor utility that builds the extended 360 tour for Meta Quest 2.
 /// </summary>
 public static class TourBuilder
 {
     // Output folder and file name of the Quest 2 build
     private const string BuildFolder = "Builds/MetaQuest2";
-    private const string BuildFile = "360VideoTour_MetaQuest2.apk";
+    private const string BuildFile = "ExtendedImmersiveTour_MetaQuest2.apk";
 
     /// <summary>
-    /// Builds the 360VideoTour scene as an Android APK for Meta Quest 2.
+    /// Scenes included in the build, in load order. The main menu opens first.
     /// </summary>
-    [MenuItem("Tools/Build 360VideoTour (Meta Quest 2)")]
+    public static readonly string[] Scenes =
+    {
+        "Assets/Scenes/MainMenuScene.unity",
+        "Assets/Scenes/IntranetTourScene.unity",
+        "Assets/Scenes/CustomCampusTourScene.unity"
+    };
+
+    /// <summary>
+    /// Builds all tour scenes as an Android APK for Meta Quest 2.
+    /// </summary>
+    [MenuItem("Tools/Extended Tour/Build APK (Meta Quest 2)")]
     public static void BuildQuest2()
     {
         Directory.CreateDirectory(BuildFolder);
 
         var options = new BuildPlayerOptions
         {
-            scenes = new[] { "Assets/Scenes/360VideoTour.unity" },
+            scenes = Scenes,
             locationPathName = Path.Combine(BuildFolder, BuildFile),
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android,

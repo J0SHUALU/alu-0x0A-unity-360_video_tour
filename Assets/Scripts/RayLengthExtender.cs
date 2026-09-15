@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Interactors.Casters;
 using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 /// <summary>
 /// Extends the controller ray length so hotspots on the inside of the
-/// 360 video spheres can be reached and pointed at from the center.
+/// 360 spheres can be reached and pointed at from the center.
 /// </summary>
 public class RayLengthExtender : MonoBehaviour
 {
@@ -15,9 +16,23 @@ public class RayLengthExtender : MonoBehaviour
     [SerializeField]
     public float rayLength = 50f;
 
-    // Creates the extender automatically once the scene has loaded
+    // Creates an extender in the first scene and in every scene loaded afterwards
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void CreateOnLoad()
+    private static void Initialize()
+    {
+        EnsureInScene();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // Adds an extender to a newly loaded scene
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        EnsureInScene();
+    }
+
+    // Creates the extender if the active scene does not have one
+    private static void EnsureInScene()
     {
         if (FindFirstObjectByType<RayLengthExtender>() == null)
         {

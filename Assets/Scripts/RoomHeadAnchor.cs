@@ -1,21 +1,37 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Keeps every 360 video sphere centered on the viewer's head.
-/// 360 video is filmed from a single point, so moving the head away from the
+/// Keeps every 360 room sphere centered on the viewer's head.
+/// 360 media is captured from a single point, so moving the head away from the
 /// sphere center makes the room look warped and the viewer feel like they are floating.
 /// </summary>
 public class RoomHeadAnchor : MonoBehaviour
 {
     // Room spheres that follow the head
-    private Transform[] rooms;
+    private readonly List<Transform> rooms = new List<Transform>();
 
     // Camera used as the head position
     private Camera head;
 
-    // Creates the anchor automatically once the scene has loaded
+    // Creates an anchor in the first scene and in every scene loaded afterwards
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void CreateOnLoad()
+    private static void Initialize()
+    {
+        EnsureInScene();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    // Adds an anchor to a newly loaded scene
+    private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        EnsureInScene();
+    }
+
+    // Creates the anchor if the active scene does not have one
+    private static void EnsureInScene()
     {
         if (FindFirstObjectByType<RoomHeadAnchor>() == null)
         {
@@ -35,16 +51,14 @@ public class RoomHeadAnchor : MonoBehaviour
 
     private void Start()
     {
+        rooms.Clear();
         var navigator = FindFirstObjectByType<RoomNavigator>();
-        if (navigator != null)
+        if (navigator == null)
+            return;
+
+        foreach (var room in navigator.AllRooms)
         {
-            rooms = new[]
-            {
-                Get(navigator.livingRoom),
-                Get(navigator.cantina),
-                Get(navigator.cube),
-                Get(navigator.mezzanine)
-            };
+            rooms.Add(room.transform);
         }
     }
 
@@ -53,17 +67,11 @@ public class RoomHeadAnchor : MonoBehaviour
         Follow();
     }
 
-    // Returns the transform of a room, or null if it is not assigned
-    private static Transform Get(GameObject room)
-    {
-        return room != null ? room.transform : null;
-    }
-
     // Moves every room sphere to the current head position
     [BeforeRenderOrder(100)]
     private void Follow()
     {
-        if (rooms == null)
+        if (rooms.Count == 0)
             return;
 
         if (head == null)

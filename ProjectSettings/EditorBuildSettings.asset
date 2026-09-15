@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/360VideoTour.unity
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: 926a48b25bb5449fb96e82cfd38c4db3
+  - enabled: 1
+    path: Assets/Scenes/IntranetTourScene.unity
     guid: 76768356225804fd6aec1c69d8c71ac3
+  - enabled: 1
+    path: Assets/Scenes/CustomCampusTourScene.unity
+    guid: dc6505c4542844eef85446fba02e5ed3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 636aead6dcbe25d4c9db468ea608b06d, type: 2}

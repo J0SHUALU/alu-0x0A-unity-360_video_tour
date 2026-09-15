@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Controls screen fade transitions between black and transparent.
-/// Used during room navigation to prevent visual disorientation.
+/// Used during room navigation and scene changes to prevent visual disorientation.
 /// </summary>
 public class ScreenFader : MonoBehaviour
 {
@@ -19,6 +19,12 @@ public class ScreenFader : MonoBehaviour
     /// </summary>
     [SerializeField]
     public Image fadeImage;
+
+    /// <summary>
+    /// When true the view starts black and fades in as the scene opens.
+    /// </summary>
+    [SerializeField]
+    public bool fadeInOnStart = true;
 
     // Singleton instance of the screen fader
     private static ScreenFader instance;
@@ -44,9 +50,25 @@ public class ScreenFader : MonoBehaviour
 
         if (fadeImage != null)
         {
-            // Ensure fade image starts fully transparent and non-blocking
-            fadeImage.color = new Color(0f, 0f, 0f, 0f);
+            // Start black when fading in, otherwise fully transparent, and never block rays
+            fadeImage.color = new Color(0f, 0f, 0f, fadeInOnStart ? 1f : 0f);
             fadeImage.raycastTarget = false;
+        }
+    }
+
+    private void Start()
+    {
+        if (fadeInOnStart && fadeImage != null)
+        {
+            StartCoroutine(FadeIn());
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
         }
     }
 
@@ -59,13 +81,13 @@ public class ScreenFader : MonoBehaviour
         if (fadeImage == null)
             yield break;
 
-        fadeImage.raycastTarget = true;
         float timer = 0f;
+        float start = fadeImage.color.a;
 
         while (timer < fadeDuration)
         {
-            timer += Time.deltaTime;
-            float alpha = Mathf.Clamp01(timer / fadeDuration);
+            timer += Time.unscaledDeltaTime;
+            float alpha = Mathf.Lerp(start, 1f, Mathf.Clamp01(timer / fadeDuration));
             fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
@@ -83,16 +105,16 @@ public class ScreenFader : MonoBehaviour
             yield break;
 
         float timer = 0f;
+        float start = fadeImage.color.a;
 
         while (timer < fadeDuration)
         {
-            timer += Time.deltaTime;
-            float alpha = 1f - Mathf.Clamp01(timer / fadeDuration);
+            timer += Time.unscaledDeltaTime;
+            float alpha = Mathf.Lerp(start, 0f, Mathf.Clamp01(timer / fadeDuration));
             fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
 
         fadeImage.color = new Color(0f, 0f, 0f, 0f);
-        fadeImage.raycastTarget = false;
     }
 }

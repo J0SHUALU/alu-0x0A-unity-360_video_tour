@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Editor tool that lays out every hotspot and info button in the 360VideoTour scene.
+/// Editor tool that lays out every hotspot and info button in the IntranetTourScene.
 /// Each button sits on a ring around the viewer, faces the center, has a large
 /// invisible hit area and is spaced so no two elements overlap.
 /// </summary>
@@ -63,7 +63,7 @@ public static class TourLayout
     /// <summary>
     /// Applies the layout to the open scene, saves it and writes a report to Logs/TourLayout.txt.
     /// </summary>
-    [MenuItem("Tools/Lay Out Tour Hotspots")]
+    [MenuItem("Tools/Extended Tour/Lay Out Intranet Hotspots")]
     public static void Apply()
     {
         var report = new StringBuilder();
@@ -144,7 +144,7 @@ public static class TourLayout
 
     // Positions a canvas on the ring, facing away from the viewer so its front is readable,
     // compensating for the room sphere's mirrored scale
-    private static void Place(Transform room, Transform canvas, float yaw)
+    internal static void Place(Transform room, Transform canvas, float yaw)
     {
         Vector3 dir = Quaternion.Euler(0f, yaw, 0f) * Vector3.forward;
         Quaternion worldRot = Quaternion.LookRotation(dir, Vector3.up);
@@ -153,12 +153,13 @@ public static class TourLayout
         canvas.localPosition = room.InverseTransformPoint(dir * Distance);
 
         // The sphere is flipped on X, so mirror the rotation and the X scale to cancel it out
+        Quaternion localRot = Quaternion.Inverse(room.rotation) * worldRot;
         if (parentScale.x < 0f)
         {
-            worldRot = new Quaternion(worldRot.x, -worldRot.y, -worldRot.z, worldRot.w);
+            localRot = new Quaternion(localRot.x, -localRot.y, -localRot.z, localRot.w);
         }
 
-        canvas.localRotation = Quaternion.Inverse(room.rotation) * worldRot;
+        canvas.localRotation = localRot;
         canvas.localScale = new Vector3(
             UnitSize / parentScale.x,
             UnitSize / parentScale.y,
@@ -166,7 +167,7 @@ public static class TourLayout
     }
 
     // Arranges a hotspot canvas: icon on the left, label on the right, one hit area covering both
-    private static void LayoutHotspot(Transform canvas)
+    internal static void LayoutHotspot(Transform canvas)
     {
         ((RectTransform)canvas).sizeDelta = HotspotCanvasSize;
 
@@ -188,7 +189,7 @@ public static class TourLayout
     }
 
     // Arranges an info canvas: button below eye level, panel directly above it
-    private static void LayoutInfo(Transform canvas)
+    internal static void LayoutInfo(Transform canvas)
     {
         ((RectTransform)canvas).sizeDelta = InfoCanvasSize;
 
