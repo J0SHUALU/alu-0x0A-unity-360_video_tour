@@ -56,6 +56,7 @@ Assets/
 │   ├── HotspotInteraction.cs
 │   ├── InfoPanelToggle.cs
 │   ├── RoomNavigator.cs
+│   ├── RayLengthExtender.cs
 │   └── ScreenFader.cs
 ├── Editor/
 │   └── TourBuilder.cs
