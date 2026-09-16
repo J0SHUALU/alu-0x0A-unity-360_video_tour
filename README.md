@@ -85,7 +85,8 @@ Assets/
 │   ├── GazeRaycaster.cs         gaze pointer from the center of view
 │   ├── HeadFollower.cs          keeps the menu and navigation bar near the viewer
 │   ├── RoomHeadAnchor.cs        keeps 360 spheres centered on the head
-│   └── RayLengthExtender.cs     lengthens controller rays to reach the spheres
+│   ├── RayLengthExtender.cs     lengthens controller rays to reach the spheres
+│   └── DesktopTestKeys.cs       Editor-only test keys (see below)
 ├── Editor/
 │   ├── ExtendedTourBuilder.cs   Tools > Extended Tour: builds and rebuilds the scenes
 │   ├── TourLayout.cs            places hotspots and info buttons on the sphere
@@ -117,6 +118,17 @@ Assets/
 4. **Run Tools → Extended Tour → Steps → 4 Build Custom Campus Tour Scene** to regenerate the scene.
 
 Photos are imported at 4096×2048 with ASTC compression for Quest 2 (see `TourAssetImporter`).
+
+## Testing in the Editor without a headset
+
+In Play mode, the Editor-only `DesktopTestKeys` script adds these keys:
+
+- **1 / 2 / 3**: open MainMenuScene, IntranetTourScene or CustomCampusTourScene
+- **N**: go to the next room
+- **I**: open or close the info boxes in the current room
+- **Arrow keys**: turn 30° left or right, or tilt up or down
+- **Right mouse drag**: look around
+- **Left click**: press a button
 
 ## Setup and build
 

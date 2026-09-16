@@ -36,6 +36,7 @@ public static class ExtendedTourBuilder
     private const string IntranetIconPath = "Assets/UI/IntranetIcon.png";
     private const string CampusIconPath = "Assets/UI/CampusIcon.png";
     private const string HomeIconPath = "Assets/UI/HomeIcon.png";
+    private const string ProgressSpritePath = "Assets/UI/ProgressFill.png";
     private const string MusicPath = "Assets/audio/freemusicbg.com-Tech Live.mp3";
     private const string MixerPath = "Assets/audio/BGMMixer.mixer";
 
@@ -528,6 +529,8 @@ public static class ExtendedTourBuilder
             AssetDatabase.CreateAsset(material, path);
         }
 
+        // Draw both faces so the sphere is visible from the inside, like the Intranet room materials
+        material.SetFloat("_Cull", 0f);
         material.SetTexture("_BaseMap", texture);
         material.SetColor("_BaseColor", Color.white);
         material.mainTexture = texture;
@@ -617,7 +620,8 @@ public static class ExtendedTourBuilder
         var track = CreateImage("ProgressTrack", parent, null, new Color(1f, 1f, 1f, 0.12f), false);
         SetRect(track.rectTransform, position, size);
 
-        var fill = CreateImage("ProgressFill", track.transform, null, AccentColor, false);
+        // A filled image needs a sprite, otherwise it always draws full
+        var fill = CreateImage("ProgressFill", track.transform, Load<Sprite>(ProgressSpritePath), AccentColor, false);
         Stretch(fill.rectTransform);
         fill.type = Image.Type.Filled;
         fill.fillMethod = Image.FillMethod.Horizontal;
