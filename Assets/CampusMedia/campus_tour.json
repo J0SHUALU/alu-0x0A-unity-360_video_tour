@@ -2,33 +2,33 @@
   "title": "Custom Campus Tour",
   "stops": [
     {
-      "id": "Stop1_Courtyard",
+      "id": "Stop1_Hall",
+      "title": "Main Hall",
+      "info": "The double-height main hall, with the staircase and standing tables. The glass doors lead out to the courtyard.",
+      "media": "Capture3",
+      "nextYaw": 14,
+      "backYaw": 180,
+      "infoYaw": -162,
+      "mediaYaw": 0
+    },
+    {
+      "id": "Stop2_Courtyard",
       "title": "Enterprise Courtyard",
-      "info": "The open courtyard in front of the Enterprise building, shaded by acacia trees. Head toward the Enterprise building to continue.",
+      "info": "The open courtyard outside the hall, shaded by acacia trees. The Enterprise building ahead leads on to the brick walkway.",
       "media": "Capture1",
       "nextYaw": 119,
-      "backYaw": 180,
+      "backYaw": 72,
       "infoYaw": 0,
       "mediaYaw": 0
     },
     {
-      "id": "Stop2_Walkway",
+      "id": "Stop3_Walkway",
       "title": "Brick Walkway",
-      "info": "A brick path along the hillside that wraps around the building. The lit entrance ahead leads inside.",
+      "info": "A brick path along the hillside that wraps around the building, with a view over the trees.",
       "media": "Capture2",
-      "nextYaw": 54,
+      "nextYaw": 0,
       "backYaw": -108,
       "infoYaw": -25,
-      "mediaYaw": 0
-    },
-    {
-      "id": "Stop3_Hall",
-      "title": "Main Hall",
-      "info": "The double-height hall inside, with the main staircase, standing tables and glass doors back out to campus.",
-      "media": "Capture3",
-      "nextYaw": 0,
-      "backYaw": 14,
-      "infoYaw": -162,
       "mediaYaw": 0
     }
   ]

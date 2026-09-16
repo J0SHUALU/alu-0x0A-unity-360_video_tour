@@ -49,7 +49,7 @@ Inside a tour, you move between rooms with the hotspots in each 360° sphere.
 
 ### Custom campus route
 
-The stops are linked in the order you walk them: **Stop 1 ↔ Stop 2 ↔ Stop 3**. Each stop has a hotspot forward, a hotspot back, and an info button, so the tour never jumps between unconnected places.
+The stops are linked in the order you walk them: **Main Hall ↔ Enterprise Courtyard ↔ Brick Walkway**. The tour starts inside the hall, goes out through the glass doors to the courtyard, then past the Enterprise building to the walkway. Each stop has a hotspot forward, a hotspot back, and an info button, so the tour never jumps between unconnected places.
 
 ## Controls (Meta Quest 2)
 
@@ -109,7 +109,7 @@ Assets/
 ## Adding your 360 captures
 
 1. **Export equirectangular files from the camera app.** Use 2:1 photos (JPG) or videos (H.264 MP4, 4096×2048 or smaller, which Quest 2 can decode).
-2. **Copy them into `Assets/CampusMedia/Captures/`.** Name them `Capture1`, `Capture2` and `Capture3`, in walking order (for example `Capture1.jpg`, `Capture2.mp4`). If a stop has both a video and a photo, the video is used.
+2. **Copy them into `Assets/CampusMedia/Captures/`.** Name them `Capture1`, `Capture2`, `Capture3` and so on (for example `Capture1.jpg`, `Capture2.mp4`). The walking order comes from the order of the stops in `campus_tour.json`. If a stop has both a video and a photo, the video is used.
 3. **Edit `Assets/CampusMedia/campus_tour.json`.**
    - Fill in each stop's `title` and `info` text.
    - `nextYaw` and `backYaw` are the directions of the forward and back hotspots, in degrees (0 = straight ahead at start, 90 = right).
