@@ -16,8 +16,8 @@
       "title": "Enterprise Courtyard",
       "info": "The open courtyard outside the hall, shaded by acacia trees. The Enterprise building ahead leads on to the brick walkway.",
       "media": "Capture1",
-      "nextYaw": 119,
-      "backYaw": 72,
+      "nextYaw": 172,
+      "backYaw": 119,
       "infoYaw": 0,
       "mediaYaw": 0
     },
@@ -27,7 +27,7 @@
       "info": "A brick path along the hillside that wraps around the building, with a view over the trees.",
       "media": "Capture2",
       "nextYaw": 0,
-      "backYaw": -108,
+      "backYaw": -85,
       "infoYaw": -25,
       "mediaYaw": 0
     }
